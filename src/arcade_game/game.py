@@ -56,6 +56,8 @@ class Game:
         """mise à jour des variables (30 fois par seconde)"""
 
         # deplacement du vaisseau
+        for tir in self.spaceship.shoots:
+          tir.update()
         self.spaceship.update()
 
     # =====================================================
@@ -68,6 +70,10 @@ class Game:
         pyxel.cls(0)
 
         self.spaceship.draw()
+        for tir in self.spaceship.shoots:
+            tir.draw()
+        
+            
 
 # instanciation de notre classe
 Game()
