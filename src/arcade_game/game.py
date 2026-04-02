@@ -59,6 +59,7 @@ class Game:
         for tir in self.spaceship.shoots:
           tir.update()
         self.spaceship.update()
+        self.update_shoot()
 
     # =====================================================
     # == DRAW (30FPS)
@@ -73,7 +74,13 @@ class Game:
         for tir in self.spaceship.shoots:
             tir.draw()
         
-            
+        
+    def update_shoot(self):
+        visible_shoots = []
+        for tir in self.spaceship.shoots:
+          if tir.y > 0:
+              visible_shoots.append(tir)
+        self.spaceship.shoots = visible_shoots
 
 # instanciation de notre classe
 Game()
