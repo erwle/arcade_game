@@ -46,6 +46,7 @@ class Spaceship :
         self.w = 8
         self.h = 8
         self.shoots = []
+        self.last_shoots = 0
 
     # =====================================================
     # == UPDATE
@@ -56,6 +57,7 @@ class Spaceship :
         self._move()
 
     def _move(self):
+        nbframes = pyxel.frame_count
         """déplacement avec les touches de directions"""
         if pyxel.btn(pyxel.KEY_RIGHT) and self.x < self.jeu.w-self.w:
             self.x += 2
@@ -65,8 +67,9 @@ class Spaceship :
             self.y += 2
         if pyxel.btn(pyxel.KEY_UP) and self.y > 0:
             self.y -= 2
-        if pyxel.btn(pyxel.KEY_SPACE):
+        if pyxel.btn(pyxel.KEY_SPACE) and nbframes > self.last_shoots + 15:
             tir = Shoot(self,self.x,self.y)
+            self.last_shoots = pyxel.frame_count
             self.shoots.append(tir)
 
                 
@@ -114,4 +117,6 @@ class Shoot:
         Mise à jour du tir
         """
         self.y -=2
+
+    
 
